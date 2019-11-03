@@ -1,0 +1,35 @@
+//https://leetcode.com/problems/maximum-depth-of-n-ary-tree/
+
+/*
+// Definition for a Node.
+class Node {
+public:
+    int val;
+    vector<Node*> children;
+
+    Node() {}
+
+    Node(int _val, vector<Node*> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+class Solution {
+public:
+   int maxDepth(Node* root) 
+    {
+        return find(root, 1);
+    }
+    
+    int find(Node* root, int depth)
+    {
+        if (!root) return depth-1;
+        
+        int maxDepth = depth;
+        for(Node* i:(*root).children)
+             maxDepth = max(find(i, depth+1), maxDepth);
+        
+        return maxDepth;
+    }
+};
