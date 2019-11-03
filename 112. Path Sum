@@ -1,0 +1,33 @@
+https://leetcode.com/problems/path-sum/
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution 
+{
+public:
+    bool hasPathSum(TreeNode* root, int sum) 
+    {
+        if (!root) return false; //no tree - no result
+        int cur = 0;
+        return deep(root, cur, sum);
+    }
+    
+     bool deep(TreeNode* root, int cur, int sum) 
+     {
+        if (!root) return false;
+        cur += (*root).val;
+        if(((*root).left == NULL) && ((*root).right == NULL))
+        {
+            if (cur == sum) return true;
+            else return false;
+        }
+        return deep((*root).left, cur, sum) || deep((*root).right, cur, sum);
+    }
+};
