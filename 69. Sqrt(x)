@@ -1,0 +1,21 @@
+//https://leetcode.com/problems/sqrtx/
+
+class Solution {
+public:
+    int mySqrt(int n) {
+        if (n==1 || n==0) {return n;}
+        else
+        {
+        int x = n-1;
+	    int xn = (x + n/x)/2;
+	    while (abs(x-xn)>1)
+	    {
+		    x = xn;
+		    xn = (x + n/x)/2;
+	    }
+        int sq = min(x,xn);
+        if (sq*sq>n) sq--;
+            return sq;
+        }
+    }
+};
