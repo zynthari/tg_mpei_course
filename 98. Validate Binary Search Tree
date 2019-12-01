@@ -1,0 +1,19 @@
+//https://leetcode.com/problems/validate-binary-search-tree/submissions/
+
+class Solution {
+public:
+    void in_order(TreeNode* root, vector<int>& tree) 
+    {
+        if (!root) return;
+        in_order(root->left, tree);
+        tree.push_back(root->val);
+        in_order(root->right, tree);
+    }
+    bool isValidBST(TreeNode* root) 
+    {
+        if (!root) return true;
+        vector<int> tree;
+        in_order(root,tree);
+        return is_sorted(tree.begin(), tree.end(), [&](int a, int b){return a <= b;});
+    }
+};
