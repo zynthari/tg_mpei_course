@@ -1,0 +1,28 @@
+//https://leetcode.com/problems/top-k-frequent-elements/
+
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) 
+    {
+        if (k == 0 || nums.size() == 0) return {};
+        unordered_map<int, int> count;
+        for (int num : nums) ++count[num];
+        priority_queue<int, vector<int>, greater<int>> pq;
+        for (auto it = count.begin(); it != count.end(); ++it) 
+        {
+            if (pq.size() < k) pq.push(it->second);
+            else if (pq.top() < it->second) 
+            {
+                pq.pop();
+                pq.push(it->second);
+            }
+        }
+        int cutOff = pq.top();
+        vector<int> res;
+        for (auto it = count.begin(); it != count.end(); ++it) 
+        {
+            if (it->second >= cutOff) res.push_back(it->first);
+        }
+        return res;
+    }
+};
