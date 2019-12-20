@@ -1,0 +1,38 @@
+//https://leetcode.com/problems/hamming-distance/
+
+class Solution {
+public:   
+    int hammingDistance(int x, int y) {     
+        string x1,y1;
+        int count=0;
+         while (x!=0)
+		{
+			if (x%2==0) {x1='0'+x1;}
+			else {x1='1'+x1;}
+			x/=2;
+		}
+        while (y!=0)
+		{
+			if (y%2==0) {y1='0'+y1;}
+			else {y1='1'+y1;}
+			y/=2;
+		}
+        if (x1.length()>y1.length())
+        {
+    	    while (y1.length()!=x1.length())
+    	    {
+    		    y1='0'+y1;
+    	    }
+        }
+        else
+            {
+    	    while (y1.length()!=x1.length())
+			    {
+				    x1='0'+x1;
+                }
+            } 
+        for (int i=0; i<x1.length(); ++i)
+        {if (x1[i]!=y1[i]) {count+=1;}}
+        return count;
+    }
+};
