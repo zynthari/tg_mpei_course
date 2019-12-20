@@ -1,0 +1,16 @@
+//https://leetcode.com/problems/fibonacci-number/
+
+class Solution {
+public:
+    int fib(int N) {
+    
+        int f;
+        if (N==0) {f=0;}
+        else
+        {
+            if (N==1) {f=1;}
+            else {f=fib(N-1)+fib(N-2);}
+        }
+        return f;
+    }
+};
