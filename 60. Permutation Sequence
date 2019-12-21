@@ -1,0 +1,28 @@
+//https://leetcode.com/problems/permutation-sequence/
+
+class Solution 
+{
+public:
+    string getPermutation(int n, int k) 
+    {
+        int numPermutations = 1; 
+        string sequence; 
+        
+        for(int i = 1; i <= n; ++i) 
+        {
+            numPermutations *= i;
+            sequence += to_string(i);
+        } 
+        string result;
+        --k;
+        while(!sequence.empty()) 
+        {
+            int index = k * sequence.size() / numPermutations;
+            result.push_back(sequence[index]);
+            sequence.erase(index, 1);
+            numPermutations /= n--;
+            k %= numPermutations;
+        }
+        return result;
+    }
+};
