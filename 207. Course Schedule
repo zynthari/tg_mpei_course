@@ -1,0 +1,35 @@
+//https://leetcode.com/problems/course-schedule/
+
+class Solution 
+{
+public:
+    bool canFinish(int nums, vector<vector<int>>& p) 
+    {
+        vector<int> v = vector<int>(nums, -1);
+        unordered_map<int, unordered_set<int>> mset;
+        for(int i = 0; i < p.size(); i++) 
+        {
+            if(v[p[i][1]] == -1 || v[p[i][0]] == -1) 
+            {
+                v[p[i][1]] = max(v[p[i][1]], 0);
+                v[p[i][0]] = max(v[p[i][0]], v[p[i][1]]+1);
+            }
+            else if(v[p[i][1]] >= v[p[i][0]])
+            {
+                if(find(mset, p[i][0], p[i][1])) return false;
+                v[p[i][0]] = v[p[i][1]] + 1;
+            }
+            mset[p[i][1]].insert(p[i][0]);
+        }
+        return true;
+    }
+    bool find(unordered_map<int, unordered_set<int>> &mset, int from, int to) 
+    {
+        if(!mset.count(from)) return false;
+        for(auto &v : mset[from]) 
+        {
+            if(v == to || find(mset, v, to)) return true;
+        }
+        return false;
+    }
+};
